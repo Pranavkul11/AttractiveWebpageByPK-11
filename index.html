@@ -1,36 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Agency PK@11</title>
-<link rel="stylesheet" href="C:\Users\prana\OneDrive\Desktop\Web Development Projects by PK\CSSforWebDevelopmentAgencyProject.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="https://gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2? family=Poppins:wght@400;700&display=swap" rel="stylesheet">  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motivational Quotes</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+      text-align: center;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #00ffe7;
+    }
+
+    #quote {
+      font-size: 1.5em;
+      margin: 20px 0;
+      font-style: italic;
+    }
+
+    #author {
+      margin-top: 10px;
+      font-size: 1em;
+      color: #ccc;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #00ffe7;
+      color: #000;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00c9b7;
+    }
+  </style>
 </head>
 <body>
-<div class="main">
-<img class="logo" src="C:\Users\prana\OneDrive\Pictures\WEB DEV IMAGES\logo.png" alt="logo">
-<h1>We are a <span class="creative">Creative</span><br />Design Agency</h1>
-<div class="left card"><img class="tile-image" src="C:\Users\prana\OneDrive\Pictures\WEB DEV IMAGES\beautiful.jpg" alt="hand and flower in water">
-    <h2 class="card-title">Beauty</h2>
-    <p class="card-text">We strive to create the most beautiful websites for all your needs. Working closely with you
-      to
-      design and
-      develop an amazing website for your business.</p>
+  <div class="container">
+    <h1>🌟 Motivational Quotes</h1>
+    <div id="quote">Click the button to get inspired!</div>
+    <div id="author"></div>
+    <button onclick="newQuote()">Inspire Me</button>
   </div>
 
-  <div class="right card"><img class="tile-image" src="C:\Users\prana\OneDrive\Pictures\WEB DEV IMAGES\construction.jpg" alt="metal structure">
-    <h2 class="card-title">Construction</h2>
-    <p>Built by our team of professional developers, we ensure the most rigourous and modern websites. Built from
-      scratch using HTML and CSS. Only the best for you.</p>
-  </div>
+  <script>
+    const quotes = [
+      { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+      { text: "Success is not final, failure is not fatal: It is the courage to continue that counts.", author: "Winston Churchill" },
+      { text: "Don’t watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
+      { text: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt" },
+      { text: "It always seems impossible until it’s done.", author: "Nelson Mandela" },
+      { text: "Push yourself, because no one else is going to do it for you.", author: "Unknown" },
+      { text: "Dream it. Wish it. Do it.", author: "Unknown" },
+      { text: "Great things never come from comfort zones.", author: "Unknown" },
+    ];
 
-</div>
-<footer>
-  <p>Create. Develop. Design.</p>
-</footer>
+    function newQuote() {
+      const random = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById('quote').textContent = `"${random.text}"`;
+      document.getElementById('author').textContent = `— ${random.author}`;
+    }
+  </script>
 </body>
-
 </html>
