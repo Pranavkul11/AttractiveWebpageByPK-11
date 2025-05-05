@@ -2,95 +2,91 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Motivational Quotes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Motivation</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
     body {
-      background: linear-gradient(to right, #141e30, #243b55);
-      color: #f5f5f5;
+      background: #0f0f0f;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', sans-serif;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       height: 100vh;
-      padding: 20px;
-    }
-
-    .container {
-      background-color: rgba(0, 0, 0, 0.4);
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.7);
       text-align: center;
-      max-width: 600px;
+      margin: 0;
+      overflow: hidden;
     }
-
     h1 {
-      font-size: 2em;
+      font-size: 2.5rem;
       margin-bottom: 20px;
-      color: #00ffe7;
+      animation: fadeIn 2s ease;
+    }
+    .quote-box {
+      font-size: 1.5rem;
+      padding: 20px 40px;
+      background: #1e1e1e;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #000;
+      max-width: 700px;
+      min-height: 120px;
+      animation: fadeIn 2s ease;
+    }
+    .typing {
+      border-right: 2px solid #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(40, end), blink 0.7s step-end infinite alternate;
     }
 
-    #quote {
-      font-size: 1.5em;
-      margin: 20px 0;
-      font-style: italic;
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
     }
 
-    #author {
-      margin-top: 10px;
-      font-size: 1em;
-      color: #ccc;
+    @keyframes blink {
+      50% { border-color: transparent }
     }
 
-    button {
-      margin-top: 20px;
-      background-color: #00ffe7;
-      color: #000;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 25px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #00c9b7;
+    @keyframes fadeIn {
+      from { opacity: 0 }
+      to { opacity: 1 }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🌟 Motivational Quotes</h1>
-    <div id="quote">Click the button to get inspired!</div>
-    <div id="author"></div>
-    <button onclick="newQuote()">Inspire Me</button>
+  <h1>🚀 Your Daily Dose of Motivation</h1>
+  <div class="quote-box">
+    <span id="quote" class="typing"></span>
   </div>
 
   <script>
     const quotes = [
-      { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
-      { text: "Success is not final, failure is not fatal: It is the courage to continue that counts.", author: "Winston Churchill" },
-      { text: "Don’t watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
-      { text: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt" },
-      { text: "It always seems impossible until it’s done.", author: "Nelson Mandela" },
-      { text: "Push yourself, because no one else is going to do it for you.", author: "Unknown" },
-      { text: "Dream it. Wish it. Do it.", author: "Unknown" },
-      { text: "Great things never come from comfort zones.", author: "Unknown" },
+      "Believe in yourself and all that you are.",
+      "Your only limit is your mind.",
+      "Push yourself, because no one else is going to do it for you.",
+      "Dream it. Wish it. Do it.",
+      "Great things never come from comfort zones.",
+      "Don’t stop when you’re tired. Stop when you’re done.",
+      "Wake up with determination. Go to bed with satisfaction.",
+      "Little things make big days."
     ];
 
-    function newQuote() {
-      const random = quotes[Math.floor(Math.random() * quotes.length)];
-      document.getElementById('quote').textContent = `"${random.text}"`;
-      document.getElementById('author').textContent = `— ${random.author}`;
+    let quoteIndex = 0;
+    const quoteEl = document.getElementById("quote");
+
+    function typeQuote() {
+      quoteEl.classList.remove("typing");
+      void quoteEl.offsetWidth; 
+      quoteEl.textContent = quotes[quoteIndex];
+      quoteEl.classList.add("typing");
+      quoteIndex = (quoteIndex + 1) % quotes.length;
     }
+
+    typeQuote(); 
+    setInterval(typeQuote, 7000); 
   </script>
 </body>
 </html>
