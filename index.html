@@ -3,90 +3,140 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Daily Motivation</title>
+  <title>Motivation Booster</title>
   <style>
-    body {
-      background: #0f0f0f;
-      color: #f0f0f0;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
+    :root {
+      --primary: #00fff2;
+      --dark-bg: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    }
+
+    * {
       margin: 0;
-      overflow: hidden;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
     }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      animation: fadeIn 2s ease;
+
+    body {
+      background: var(--dark-bg);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #fff;
+      text-align: center;
     }
-    .quote-box {
-      font-size: 1.5rem;
-      padding: 20px 40px;
-      background: #1e1e1e;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #000;
+
+    .container {
+      background: rgba(0, 0, 0, 0.45);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 255, 242, 0.2);
       max-width: 700px;
-      min-height: 120px;
-      animation: fadeIn 2s ease;
-    }
-    .typing {
-      border-right: 2px solid #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: typing 4s steps(40, end), blink 0.7s step-end infinite alternate;
+      width: 100%;
+      animation: fade 1s ease;
+      transition: all 0.3s ease;
     }
 
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+    @keyframes fade {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    @keyframes blink {
-      50% { border-color: transparent }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+      text-shadow: 0 0 10px rgba(0, 255, 242, 0.5);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0 }
-      to { opacity: 1 }
+    #quote {
+      font-size: 1.3rem;
+      font-style: italic;
+      margin: 20px 0;
+      line-height: 1.5;
+    }
+
+    #author {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    button {
+      margin-top: 25px;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 255, 242, 0.3);
+    }
+
+    button:hover {
+      background: #00d7c3;
+      box-shadow: 0 0 15px rgba(0, 255, 242, 0.5);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 25px 20px;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      #quote {
+        font-size: 1.1rem;
+      }
+
+      button {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>🚀 Your Daily Dose of Motivation</h1>
-  <div class="quote-box">
-    <span id="quote" class="typing"></span>
+  <div class="container">
+    <h1>🔥 Fuel Your Mind</h1>
+    <div id="quote">Click below to light your soul.</div>
+    <div id="author"></div>
+    <button onclick="nextQuote()">Next Quote</button>
   </div>
 
   <script>
     const quotes = [
-      "Believe in yourself and all that you are.",
-      "Your only limit is your mind.",
-      "Push yourself, because no one else is going to do it for you.",
-      "Dream it. Wish it. Do it.",
-      "Great things never come from comfort zones.",
-      "Don’t stop when you’re tired. Stop when you’re done.",
-      "Wake up with determination. Go to bed with satisfaction.",
-      "Little things make big days."
+      { text: "Believe in yourself and you're halfway there.", author: "Theodore Roosevelt" },
+      { text: "Don’t stop when you're tired. Stop when you're done.", author: "Unknown" },
+      { text: "Great things never come from comfort zones.", author: "Unknown" },
+      { text: "You don’t need to see the whole staircase, just take the first step.", author: "Martin Luther King Jr." },
+      { text: "The harder you work for something, the greater you’ll feel when you achieve it.", author: "Unknown" },
+      { text: "Dream big. Work hard. Stay focused.", author: "Unknown" },
+      { text: "Push yourself, because no one else is going to do it for you.", author: "Unknown" }
     ];
 
-    let quoteIndex = 0;
-    const quoteEl = document.getElementById("quote");
+    let index = 0;
 
-    function typeQuote() {
-      quoteEl.classList.remove("typing");
-      void quoteEl.offsetWidth; 
-      quoteEl.textContent = quotes[quoteIndex];
-      quoteEl.classList.add("typing");
-      quoteIndex = (quoteIndex + 1) % quotes.length;
+    function nextQuote() {
+      const quoteBox = document.querySelector(".container");
+      quoteBox.style.animation = "none";
+      void quoteBox.offsetWidth;
+      quoteBox.style.animation = "fade 1s ease";
+
+      const quote = quotes[index];
+      document.getElementById('quote').textContent = `"${quote.text}"`;
+      document.getElementById('author').textContent = `— ${quote.author}`;
+      index = (index + 1) % quotes.length;
     }
 
-    typeQuote(); 
-    setInterval(typeQuote, 7000); 
+    window.onload = nextQuote;
   </script>
 </body>
 </html>
